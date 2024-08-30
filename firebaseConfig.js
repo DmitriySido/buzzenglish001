@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"; // Для работы с Firestore
 
-// Ваша конфигурация Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCxrta66v9ulD3CKxCqBnXHS2MWg2ch_TA",
   authDomain: "learnenglish002-cddb5.firebaseapp.com",
