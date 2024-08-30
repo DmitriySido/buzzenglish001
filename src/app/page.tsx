@@ -13,10 +13,10 @@ export default function Home() {
   useEffect(()=>{
     const listen = onAuthStateChanged(auth, (user: any) => {
       if(user){
-        router.replace('/education');
+        router.replace('/buzzenglish/education');
         setAuthUser(user)
       }else{
-        router.replace('/login');
+        router.replace('/buzzenglish/login');
         setAuthUser(null)
       }
     })
@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>ПодождитеCcc...</h1>
+      <h1>ПодождитеCccs...</h1>
     </main>
   );
 }
