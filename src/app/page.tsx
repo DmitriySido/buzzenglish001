@@ -26,21 +26,9 @@ export default function Home() {
     }
   },[])
 
-
-  // useEffect(() => {
-  //   const userData = localStorage.getItem('userData');
-  //   if (userData) {
-  //     console.log('YES')
-  //     router.replace('/education');
-  //   }else{
-  //     console.log('NO')
-  //     router.replace('/login');
-  //   }
-  // }, []);
-
   return (
     <main>
-      <h1>Подождите...</h1>
+      <h1>ПодождитеCC...</h1>
     </main>
   );
 }
