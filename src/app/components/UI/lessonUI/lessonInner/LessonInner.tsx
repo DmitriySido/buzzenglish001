@@ -1,0 +1,65 @@
+'use client'
+
+import './lessonInner.scss'
+import Image, { StaticImageData } from "next/image"
+import Quiz from "../quiz/Quiz"
+import React, { useEffect, useMemo, useState } from 'react';
+
+import Man1 from '../../../../../../public/personage/man-1.png'
+import Man2 from '../../../../../../public/personage/man-2.png'
+import Man3 from '../../../../../../public/personage/man-3.png'
+import Man4 from '../../../../../../public/personage/man-4.png'
+import Woman1 from '../../../../../../public/personage/woman-1.png'
+import { DialogType, PhraseType, WordType } from '@/app/utils/interfaces/ILessons/ILessons';
+
+interface ILessonInner {
+  currentQuestion: WordType | PhraseType | DialogType | undefined,
+  currentLang: number,
+  answerList: string[],
+  isButtonNext: boolean,
+  handleDeleteButton: (state: string) => void,
+  sideWordsArrayRef: React.RefObject<string[]>,
+  getContent: (state: string[]) => void,
+  randomTaskState: number
+}
+
+const LessonInner = ({ currentQuestion, currentLang, answerList, isButtonNext, handleDeleteButton, sideWordsArrayRef, getContent, randomTaskState }: ILessonInner) => {
+  const personageList = useMemo(() => [Man1, Man2, Man3, Man4, Woman1], []);
+  const [personageFoto, setPersonageFoto] = useState<StaticImageData | undefined>(undefined);
+
+  useEffect(()=>{
+    const randomIndex = Math.floor(Math.random() * personageList.length);
+    setPersonageFoto(personageList[randomIndex]);
+  },[])
+
+  return(
+    <div className="lesson__inner">
+      {currentQuestion &&
+      <>
+        {personageFoto && (
+          <Image
+            className="personage-foto"
+            src={personageFoto}
+            width={100}
+            height={150}
+            alt={"personage foto"}
+          />
+        )}
+
+        {(randomTaskState === 0 && "wordEn" in currentQuestion || randomTaskState === 1 && "phrasesEn" in currentQuestion || randomTaskState === 2 && "dialogEn" in currentQuestion) && (
+          <Quiz
+            currentLang={currentLang}
+            currentQuestion={currentQuestion}
+            answerList={answerList}
+            isButtonNext={isButtonNext}
+            handleDeleteButton={handleDeleteButton}
+            sideWordsArrayRef={sideWordsArrayRef}
+            getContent={getContent}
+          />
+        )}
+      </>}
+    </div>
+  )
+} 
+
+export default LessonInner

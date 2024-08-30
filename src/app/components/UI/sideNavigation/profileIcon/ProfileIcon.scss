@@ -1,0 +1,10 @@
+.profile-icon__wrapper{
+  position: relative;
+
+  .profile-icon-eye{
+    position: absolute;
+    left: 0px;
+    top: -4px;
+    z-index: 1;
+  }
+}

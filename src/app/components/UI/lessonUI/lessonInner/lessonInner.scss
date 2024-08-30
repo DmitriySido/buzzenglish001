@@ -1,0 +1,14 @@
+.lesson__inner{
+  margin-top: 100px;
+  padding: 20px 30px;
+  height: auto;
+  width: 100%;
+  position: relative;
+
+  .personage-foto{
+    position: absolute;
+    left: 60px;
+    top: -80px;
+    z-index: -1;
+  }
+}

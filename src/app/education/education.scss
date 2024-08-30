@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+
+  .lesson-list {
+    width: 50vw;
+    height: 100%;
+    padding: 10px;
+    border-left: 1px solid #494954;
+    border-right: 1px solid #494954;
+  
+    .lesson-button__wrapper{
+      position: relative;
+      text-align: center;
+    }
+  }
+  
+  .side-info {
+    position: fixed;
+    right: 0;
+    top: 20px;
+    width: 30vw;
+    height: 100vh;
+    border-left: 1px solid #494954;
+  }
+}

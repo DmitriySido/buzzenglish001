@@ -1,0 +1,63 @@
+.lesson-item {
+  position: relative;
+  background: gray;
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+  margin: 0 auto 10px auto;
+  transform: translateX(0px) scaleY(0.9) translateY(-6px);
+
+  .icon-star{
+    margin-left: -2px;
+    margin-top: -2px;
+  }
+}
+
+.lesson-button__wrapper:nth-child(2n) .lesson-item {
+  transform: translateX(60px) scaleY(0.9) translateY(-6px);
+
+  &:active{
+    transform: translateX(60px) scaleY(0.9) translateY(0px);
+    box-shadow: 0px 0px transparent;
+  }
+}
+
+.lesson-button__wrapper:nth-child(3n) .lesson-item {
+  transform: translateX(100px) scaleY(0.9) translateY(-6px);
+  margin: 20px auto 20px auto;
+
+  &:active{
+    transform: translateX(100px) scaleY(0.9) translateY(0px);
+    box-shadow: 0px 0px transparent;
+  }
+}
+
+.lesson-button__wrapper:nth-child(6n) .lesson-item {
+  transform: translateX(-50px) scaleY(0.9) translateY(-6px);
+  margin: 20px auto 20px auto;
+
+  &:active{
+    transform: translateX(-50px) scaleY(0.9) translateY(0px);
+    box-shadow: 0px 0px transparent;
+  }
+}
+
+.blue-lesson-item {
+  background: rgb(0, 148, 197);
+  box-shadow: 0 6px rgb(0, 106, 142);
+}
+
+.blue-lesson-item:active{
+  transform: translateX(0px) scaleY(0.9) translateY(0px);
+  box-shadow: 0px 0px transparent;
+}
+
+.yellow-lesson-item {
+  background: rgb(234, 210, 0);
+  box-shadow: 0 6px rgb(193, 152, 2);
+
+  &:active{
+    transform: translateX(0px) scaleY(0.9) translateY(0px);
+    box-shadow: 0px 0px transparent;
+  }
+}

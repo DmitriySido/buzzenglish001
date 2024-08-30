@@ -1,0 +1,20 @@
+.create-account-button{
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  background: #fff;
+
+  padding: 15px 30px;
+  margin: 120px auto 0px auto;
+  display: flex;
+  justify-content: center;
+
+  border: 2px solid transparent;
+  transition: all .1s ease-in-out;
+
+  &:hover{
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+}

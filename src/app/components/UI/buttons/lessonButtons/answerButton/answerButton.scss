@@ -1,0 +1,17 @@
+.answer-button{
+  padding: 10px 15px;
+  background: #ffffff;
+  border-radius: 8px;
+  color: #010027;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  margin: 10px;
+  box-shadow: 0 4px #61616b;
+  transition: all .1s ease-in-out;
+
+  &:active{
+    transform: translateY(4px);
+    box-shadow: 0 0px transparent;
+  }
+}

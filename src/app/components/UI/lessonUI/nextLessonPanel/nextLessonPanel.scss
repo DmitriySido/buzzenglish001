@@ -1,0 +1,51 @@
+.next-lesson__pannel-wrapper{
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100vw;
+  height: 20vh;
+  background: #0b0936;
+  border-top: 1px solid #61616b;
+
+  .next-lesson__pannel-inner{
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text-content{
+      display: flex;
+      align-items: center;
+
+      .next-lesson-icon{
+        width: 70px;
+        height: 70px;
+  
+        margin-right: 10px;
+      }
+  
+      .phrase-text{
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+
+    .button-next{
+      padding: 15px 50px;
+      background: #01ba01;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      margin: 10px;
+      box-shadow: 0 4px #006900;
+      transition: all .1s ease-in-out;
+
+      &:active{
+        transform: translateY(4px);
+        box-shadow: 0 0px transparent;
+      }
+    }
+  }
+}

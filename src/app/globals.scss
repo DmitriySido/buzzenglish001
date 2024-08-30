@@ -1,0 +1,81 @@
+/*Обнуление*/
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+*,*:before,*:after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 16px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a,a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
+
+hr{
+  border: 0;
+  margin: 10px 0px 0px 0px;
+  display: block;
+  background-color: lightgray;
+
+  width: 100%;
+  height: 1px;
+}
+/*--------------------*/
+
+/*Slider*/
+::-webkit-scrollbar {
+  width: 9px;
+  height: auto;
+  background-color: #010027;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 10px;
+}
+
+
+body{
+  overflow-x: hidden;
+  background: #010027;
+  color: #fff;
+}
+
+.main-container{
+  position: absolute;
+  
+  right: 0px;
+  left: 220px;
+
+  width: 100%;
+  max-width: 1150px;
+  padding: 20px 10px 0px 10px;
+  margin: 0 auto;
+}
+
+.container{
+  width: 100%;
+  max-width: 850px;
+  padding: 20px 5px 0px 5px;
+  margin: 0 auto;
+}

@@ -1,0 +1,30 @@
+
+.error-message__wrapper{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width: 100vw;
+
+  .error-title{
+    position: absolute;
+    top: 36%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size: 16px;
+    letter-spacing: 1.2px;
+
+    text-align: center;
+  }
+
+  .error-message{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+
+    font-size: 18px;
+    letter-spacing: 1.2px;
+    text-align: center;
+  }
+}

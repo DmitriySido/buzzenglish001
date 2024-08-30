@@ -1,0 +1,34 @@
+.button-to-back{
+  color: #fff;
+  font-size: 0px;
+  padding: 20px;
+  z-index: 3;
+  position: relative;
+  border-radius: 100px;
+  margin-right: 15px;
+  background: transparent;
+
+  &::before{
+    position: absolute;
+    content: '';
+    width: 25px;
+    left: 7px;
+    top: 18px;
+    transform: rotate(45deg);
+    height: 2px;
+    background: #494954;
+    border-radius: 10px;
+  }
+
+  &::after{
+    position: absolute;
+    content: '';
+    width: 25px;
+    left: 7px;
+    top: 18px;
+    transform: rotate(-45deg);
+    height: 2px;
+    background: #494954;
+    border-radius: 10px;
+  }
+}
