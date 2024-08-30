@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>Подождите...</h1>
+      <h1>Подождите..</h1>
     </main>
   );
 }
