@@ -3,10 +3,12 @@ import './progressBar.scss';
 
 interface ProgressBarProps {
   progress: number;
+  maxProgress: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
-  const normalizedProgress = Math.max(0, Math.min(100, progress));
+const ProgressBar: React.FC<ProgressBarProps> = ({ progress, maxProgress }) => {
+  const normalizedProgress = Math.max(0, Math.min(100, (progress / maxProgress) * 100));
+  console.log(normalizedProgress)
 
   return (
     <div className="progress-bar">

@@ -1,0 +1,43 @@
+.side-right-panel{
+  width: 30%;
+  background-color: transparent;
+  padding: 20px 20px 0px 20px;
+
+  .side-right-panel__inner{
+    .user-experience{
+      margin-bottom: 15px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+  
+    .tasks-the-day__list{
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid #494954;
+      
+      .task-list-title{
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+  
+      .tasks-the-day__item{
+
+        .task-the-day{
+          display: flex;
+          width: 100%;
+          margin: 20px 0px;
+          
+          .task-content{
+            display: grid;
+            width: 100%;
+
+            .task-title{
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

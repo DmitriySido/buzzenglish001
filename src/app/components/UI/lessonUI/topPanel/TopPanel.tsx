@@ -10,7 +10,7 @@ const TopPanel = ({ progress }: ProgressBarProps) => {
   return(
     <div className="top-panel__wrapper">
       <ButtonBack/>
-      <ProgressBar progress={progress}/>
+      <ProgressBar progress={progress} maxProgress={100}/>
     </div>
   )
 }

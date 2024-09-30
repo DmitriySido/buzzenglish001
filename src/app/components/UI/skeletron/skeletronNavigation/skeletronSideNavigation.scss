@@ -1,0 +1,24 @@
+.skeletron-side-navigation{
+  .logo__wrapper{
+    .logo{
+      color: gray;
+    }
+  }
+
+  .navigation-list{
+    .side-navigation-item{
+
+      .side-navigation-link{
+        color: gray;
+        background: #383841;
+
+        .side-navigation-icon{
+          width: 30px;
+          height: 30px;
+          background: gray;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+}

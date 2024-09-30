@@ -1,36 +1,37 @@
-import { CurrentLessonType, DialogType, PhraseType, WordType } from "../interfaces/ILessons/ILessons";
+import { CurrentLessonType, DialogType, FewWords, PhraseType, WordType } from "../interfaces/ILessons/ILessons";
 import React from 'react';
 
 interface ICurrentQuestion {
-  CurrentLesson: CurrentLessonType,
-  setAnswerList: (state: string[]) => void,
-  setRandomTaskState: (state: number) => void,
-  currentLang: number,
-  randomTaskState: number,
-  sideWordsArrayRef: React.RefObject<string[]>,
-  setCurrentQuestion: (state: WordType | PhraseType | DialogType | undefined) => void
+  CurrentLesson: CurrentLessonType;
+  setAnswerList: (state: string[]) => void;
+  setRandomTaskState: (state: number) => void;
+  currentLang: number;
+  randomTaskState: number;
+  sideWordsArrayRef: React.RefObject<string[]>;
+  setCurrentQuestion: (state: WordType | PhraseType | DialogType | FewWords[] | undefined) => void;
 }
 
 const shuffleSideWords = (array: string[]) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // обмен элементов
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
   }
 };
 
 export const currentQuestionFunc = ({
-  CurrentLesson, 
-  setAnswerList, 
-  setRandomTaskState, 
-  currentLang, 
-  randomTaskState, 
-  sideWordsArrayRef, 
+  CurrentLesson,
+  setAnswerList,
+  setRandomTaskState,
+  currentLang,
+  randomTaskState,
+  sideWordsArrayRef,
   setCurrentQuestion
 }: ICurrentQuestion) => {
   if (!CurrentLesson) return;
 
   setAnswerList([]);
-  const newRandomTaskState = Math.floor(Math.random() * 3);
+  // const newRandomTaskState = 3
+  const newRandomTaskState = Math.floor(Math.random() * 4);
   setRandomTaskState(newRandomTaskState);
 
   const keys = Object.keys(CurrentLesson) as Array<keyof CurrentLessonType>;
@@ -38,12 +39,14 @@ export const currentQuestionFunc = ({
   const currentValue = CurrentLesson[currentKey];
 
   const randomNumber = Math.floor(Math.random() * currentValue.length);
-  let question: WordType | PhraseType | DialogType | undefined;
+  let question: WordType | PhraseType | DialogType | FewWords[] | undefined;
   let sideWords: string[] = [];
+
 
   if (currentKey === "words") {
     question = currentValue[randomNumber] as WordType;
     sideWords = currentLang === 0 ? question.sideWords.sideWordsRu : question.sideWords.sideWordsEn;
+
   } else if (currentKey === "phrases") {
     question = currentValue[randomNumber] as PhraseType;
     sideWords = currentLang === 0 ? question.sideWords.sideWordsRu : question.sideWords.sideWordsEn;
@@ -53,6 +56,7 @@ export const currentQuestionFunc = ({
       const filteredPhrasesWords = phrasesWords.filter(word => word.trim() !== "");
       sideWords.push(...filteredPhrasesWords);
     }
+
   } else if (currentKey === "dialog") {
     question = currentValue[randomNumber] as DialogType;
     sideWords = currentLang === 0 ? question.sideWords.sideWordsRu : question.sideWords.sideWordsEn;
@@ -62,6 +66,11 @@ export const currentQuestionFunc = ({
       const filteredPhrasesWords = phrasesWords.filter(word => word.trim() !== "");
       sideWords.push(...filteredPhrasesWords);
     }
+
+  } else if (currentKey === "fewWords") {
+    const randomFewWords = currentValue.sort(() => Math.random() - 0.5).slice(0, 4) as FewWords[];
+    setCurrentQuestion(randomFewWords); // Pass FewWords array here
+    return;
   }
 
   if (randomTaskState === 0 && question) {
@@ -70,13 +79,12 @@ export const currentQuestionFunc = ({
     sideWords.push(wordToAdd);
   }
 
-  // Перемешиваем sideWords
+  // Shuffle sideWords
   shuffleSideWords(sideWords);
 
-  // Обновляем sideWordsArrayRef текущий
+  // Update sideWordsArrayRef
   if (sideWordsArrayRef.current) {
-    // Update the existing array instead of reassigning it
-    sideWordsArrayRef.current.length = 0; // Clear the current array
+    sideWordsArrayRef.current.length = 0;
     sideWordsArrayRef.current.push(...sideWords.filter(word => word !== undefined && word.trim() !== ""));
   }
 

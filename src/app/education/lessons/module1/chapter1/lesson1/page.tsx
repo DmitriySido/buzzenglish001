@@ -3,12 +3,13 @@
 import '../../../lessons.scss'
 import { useLessonContext } from "@/app/utils/context/LessonContext";
 import TopPanel from "@/app/components/UI/lessonUI/topPanel/TopPanel";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import NextLessonPanel from "@/app/components/UI/lessonUI/nextLessonPanel/NextLessonPanel";
-import { CurrentLessonType, DialogType, PhraseType, WordType } from "@/app/utils/interfaces/ILessons/ILessons";
+import { CurrentLessonType, DialogType, FewWords, PhraseType, WordType } from "@/app/utils/interfaces/ILessons/ILessons";
 
 import { currentQuestionFunc } from "@/app/utils/hooks/currentQuestionFunc";
 import LessonInner from "@/app/components/UI/lessonUI/lessonInner/LessonInner";
+import Lessonloading from '@/app/components/Lessonloading/Lessonloading';
 
 const CurrentLesson: CurrentLessonType = {
   words: [
@@ -34,22 +35,31 @@ const CurrentLesson: CurrentLessonType = {
     { dialogRu: 'Как тебя зовут', dialogEn: 'What is your name', sideWords: { sideWordsRu: ['где', 'сколько', 'нас'], sideWordsEn: ['where', 'why', 'you'] } },
     { dialogRu: 'Это моя подруга Capa', dialogEn: 'This is my friend Sarah', sideWords: { sideWordsRu: ['наша', 'ваша', 'твоя'], sideWordsEn: ['our', 'us', 'you'] } },
     { dialogRu: 'Сколько тебе лет', dialogEn: 'How old are you', sideWords: { sideWordsRu: ['дней', 'кто', 'где'], sideWordsEn: ['where', 'are', 'is'] } },
+  ],
+  fewWords: [
+    {fewWordRu: 'Привет', fewWordEn: 'Hello'}, {fewWordRu: 'Доброе утро', fewWordEn: 'Good morn­ing'}, {fewWordRu: 'Добрый вечер', fewWordEn: 'Good evening'}, {fewWordRu: 'Добрый день', fewWordEn: 'Good afternoon'}, {fewWordRu: 'Спасибо вам', fewWordEn: 'Thank you'},
+    {fewWordRu: 'Как делишки?', fewWordEn: "What's up?"}, {fewWordRu: 'Извините меня', fewWordEn: 'Excuse me'}, {fewWordRu: 'Хорошо', fewWordEn: 'Fine'}, {fewWordRu: 'Мне жаль', fewWordEn: "I'm sorry"}, {fewWordRu: 'Меня зовут...', fewWordEn: 'My name is...'},
   ]
 }
 
 const Lesson1 = () => {
   const { lessons } = useLessonContext();
-
   const [randomTaskState, setRandomTaskState] = useState<number>(0);
-  const [currentQuestion, setCurrentQuestion] = useState<WordType | PhraseType | DialogType | undefined>();
+  const [currentQuestion, setCurrentQuestion] = useState<WordType | PhraseType | DialogType | FewWords[] | undefined>();
   const [currentLang, setCurrentLang] = useState<number>(0);
   const sideWordsArrayRef = useRef<string[]>([]);
-
   const [answerList, setAnswerList] = useState<string[]>([]);
   const [isButtonNext, setIsButtonNext] = useState<boolean>(false);
   const [progressBar, setProgressBar] = useState<number>(0);
+  const [quizCounter, setQuizCounter] = useState<number>(0);
 
-  useEffect(() => {
+  const [isSoundPlayed, setIsSoundPlayed] = useState(false);
+
+  const handleQuizCounterChange = useCallback((newCounter: number) => {
+    setQuizCounter(newCounter);
+  }, []);
+
+  const updateCurrentQuestion = useCallback(() => {
     if (lessons) {
       currentQuestionFunc({
         CurrentLesson, 
@@ -60,8 +70,13 @@ const Lesson1 = () => {
         sideWordsArrayRef, 
         setCurrentQuestion
       });
+      setQuizCounter(0)
     }
-  }, [lessons, randomTaskState, currentLang]);
+  }, [lessons, currentLang, randomTaskState]);
+
+  useEffect(() => {
+    updateCurrentQuestion();
+  }, [updateCurrentQuestion]);
 
   useEffect(() => {
     setIsButtonNext(false);
@@ -70,50 +85,48 @@ const Lesson1 = () => {
         isCorrectAnswer(currentQuestion.phrasesEn, currentQuestion.phrasesRu);
       } else if ("wordEn" in currentQuestion && "wordRu" in currentQuestion) {
         isCorrectAnswer(currentQuestion.wordEn, currentQuestion.wordRu);
-      } else if (
-        "dialogRu" in currentQuestion &&
-        "dialogRu" in currentQuestion
-      ) {
+      } else if ("dialogEn" in currentQuestion && "dialogRu" in currentQuestion) {
         isCorrectAnswer(currentQuestion.dialogEn, currentQuestion.dialogRu);
+      } else if (quizCounter && quizCounter === 4) {
+        setIsButtonNext(true);
       }
     }
-  }, [answerList]);
+  }, [answerList, quizCounter]);
 
   const handleNextQuestion = () => {
-    currentQuestionFunc({
-      CurrentLesson, 
-      setAnswerList, 
-      setRandomTaskState, 
-      currentLang, 
-      randomTaskState, 
-      sideWordsArrayRef, 
-      setCurrentQuestion
-    });
-    setCurrentLang((prevLang) => (prevLang === 0 ? 1 : 0));
+    updateCurrentQuestion();
+    setCurrentLang(prevLang => (prevLang === 0 ? 1 : 0));
+    if (quizCounter && quizCounter === 4) {
+      setProgressBar(prev => prev + 10);
+
+      // Добавляем звук
+      if (!isSoundPlayed && 1 > 0) {
+        const audio = new Audio('/sound/correct-answer.wav');
+        audio.play();
+      }
+    }
   };
 
   const getContent = (content: string[]) => {
-    sideWordsArrayRef.current = sideWordsArrayRef.current.filter(
-      (item) => !content.includes(item),
-    );
-
-    setAnswerList((prevWord) => [...prevWord, ...content]);
+    sideWordsArrayRef.current = sideWordsArrayRef.current.filter(item => !content.includes(item));
+    setAnswerList(prevWord => [...prevWord, ...content]);
   };
 
   const isCorrectAnswer = (taskEn: string, taskRu: string) => {
-    if (
-      (answerList.length > 0 && taskEn === answerList.join(" ")) ||
-      (answerList.length > 0 && taskRu === answerList.join(" "))
-    ) {
+    if ((answerList.length > 0 && taskEn === answerList.join(" ")) || 
+        (answerList.length > 0 && taskRu === answerList.join(" "))) {
       setIsButtonNext(true);
-      setProgressBar(progressBar + 10);
+      setProgressBar(prev => prev + 10);
+      if (!isSoundPlayed && 1 > 0) {
+        const audio = new Audio('/sound/correct-answer.wav');
+        audio.play();
+      }
     }
   };
 
   const handleDeleteButton = (word: string) => {
     sideWordsArrayRef.current = [...sideWordsArrayRef.current, word];
-
-    setAnswerList((prevWords) => prevWords.filter((item) => item !== word));
+    setAnswerList(prevWords => prevWords.filter(item => item !== word));
   };
 
   return (
@@ -130,6 +143,7 @@ const Lesson1 = () => {
             sideWordsArrayRef={sideWordsArrayRef}
             getContent={getContent}
             randomTaskState={randomTaskState}
+            onQuizCounterChange={handleQuizCounterChange}
           />
         )}
       </div>
@@ -146,6 +160,8 @@ const Lesson1 = () => {
 
 export default Lesson1;
 
-// добавить в fireBase данные урока
-
+// Сделать нормальный код
+// выносить нужные функции или тп в модули в отдельные файлы
 // Добавить справочник для каждого модуля!
+
+// настройки звука, отклюсить / сделать тише

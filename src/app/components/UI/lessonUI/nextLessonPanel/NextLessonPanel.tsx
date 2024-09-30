@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import './nextLessonPanel.scss'
 import Image from 'next/image';
 import TrueIcon from '../../../../../../public/icons/true-icons.png'
-import FalseIcon from '../../../../../../public/icons/false-icon.png'
 import { auth, db } from '../../../../../../firebaseConfig';
-import { useLessonContext } from '@/app/utils/context/LessonContext';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 

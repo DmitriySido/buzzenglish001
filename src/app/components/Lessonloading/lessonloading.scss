@@ -1,0 +1,32 @@
+.loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: #010027;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+
+  .loading-title {
+    font-size: 18px;
+    font-weight: 200;
+    margin-bottom: 30px;
+  }
+
+  .loading-phrase {
+    color: white;
+    font-size: 22px;
+    font-weight: 200;
+  }
+}
+
+.loading.inactive {
+  opacity: 0;
+  pointer-events: none;
+}

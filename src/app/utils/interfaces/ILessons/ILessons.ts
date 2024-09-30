@@ -38,8 +38,14 @@ export interface DialogType {
   sideWords: SideWordsType;
 }
 
+export interface FewWords {
+  fewWordRu: string;
+  fewWordEn: string
+}
+
 export interface CurrentLessonType {
   words: WordType[];
   phrases: PhraseType[];
   dialog: DialogType[];
+  fewWords: FewWords[]
 }

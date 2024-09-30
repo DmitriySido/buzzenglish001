@@ -1,0 +1,17 @@
+.skeletron{
+  overflow-y: hidden;
+  
+  .lesson-title__module{
+    background: #383841;
+    color: transparent;
+    border-radius: 10px;
+    width: 200px;
+  }
+
+  .lesson-chapter-title{
+    background: #383841;
+    color: transparent;
+    width: 300px;
+    border-radius: 10px;
+  }
+}

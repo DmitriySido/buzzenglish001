@@ -10,22 +10,30 @@ import Man2 from '../../../../../../public/personage/man-2.png'
 import Man3 from '../../../../../../public/personage/man-3.png'
 import Man4 from '../../../../../../public/personage/man-4.png'
 import Woman1 from '../../../../../../public/personage/woman-1.png'
-import { DialogType, PhraseType, WordType } from '@/app/utils/interfaces/ILessons/ILessons';
+import { DialogType, FewWords, PhraseType, WordType } from '@/app/utils/interfaces/ILessons/ILessons';
 
 interface ILessonInner {
-  currentQuestion: WordType | PhraseType | DialogType | undefined,
+  currentQuestion: WordType | PhraseType | DialogType | FewWords[] | undefined,
   currentLang: number,
   answerList: string[],
   isButtonNext: boolean,
   handleDeleteButton: (state: string) => void,
   sideWordsArrayRef: React.RefObject<string[]>,
   getContent: (state: string[]) => void,
-  randomTaskState: number
+  randomTaskState: number,
+  onQuizCounterChange?: (newCounter: number) => void 
 }
 
-const LessonInner = ({ currentQuestion, currentLang, answerList, isButtonNext, handleDeleteButton, sideWordsArrayRef, getContent, randomTaskState }: ILessonInner) => {
+const LessonInner = ({ currentQuestion, onQuizCounterChange , currentLang, answerList, isButtonNext, handleDeleteButton, sideWordsArrayRef, getContent, randomTaskState = 3 }: ILessonInner) => {
   const personageList = useMemo(() => [Man1, Man2, Man3, Man4, Woman1], []);
   const [personageFoto, setPersonageFoto] = useState<StaticImageData | undefined>(undefined);
+
+  const [quizCounter, setQuizCounter] = useState<number>(0);
+
+  const updateQuizCounter = (newCounter: number) => {
+    setQuizCounter(newCounter);
+    onQuizCounterChange && onQuizCounterChange(newCounter);
+  };
 
   useEffect(()=>{
     const randomIndex = Math.floor(Math.random() * personageList.length);
@@ -46,7 +54,7 @@ const LessonInner = ({ currentQuestion, currentLang, answerList, isButtonNext, h
           />
         )}
 
-        {(randomTaskState === 0 && "wordEn" in currentQuestion || randomTaskState === 1 && "phrasesEn" in currentQuestion || randomTaskState === 2 && "dialogEn" in currentQuestion) && (
+        {(randomTaskState === 0 && "wordEn" in currentQuestion || randomTaskState === 1 && "phrasesEn" in currentQuestion || randomTaskState === 2 && "dialogEn" in currentQuestion || randomTaskState === 3) && (
           <Quiz
             currentLang={currentLang}
             currentQuestion={currentQuestion}
@@ -55,6 +63,7 @@ const LessonInner = ({ currentQuestion, currentLang, answerList, isButtonNext, h
             handleDeleteButton={handleDeleteButton}
             sideWordsArrayRef={sideWordsArrayRef}
             getContent={getContent}
+            updateCounter={updateQuizCounter}
           />
         )}
       </>}

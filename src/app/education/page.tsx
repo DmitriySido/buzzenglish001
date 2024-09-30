@@ -15,7 +15,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { ILesson, SomeFieldType } from '../utils/interfaces/ILessons/ILessons';
 import { UserDataType } from '../utils/interfaces/IUser/IUser';
 import { DataType } from '../utils/interfaces/IData/IData';
-import Loading from '../components/UI/loading/Loading';
+import SideRightPanel from '../components/UI/sideRightPanel/SideRightPanel';
+import SkeletronEducation from '../components/UI/skeletron/skeletronEducation/SkeletronEducation';
 
 
 
@@ -30,6 +31,7 @@ export default function Education() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('reload')
     const fetchData = async () => {
       try {
         const [lessonsSnapshot, usersSnapshot] = await Promise.all([
@@ -140,10 +142,17 @@ export default function Education() {
             );
           })}
         </ul>
+
+        <SideRightPanel/>
     </main>
     :
-    <Loading />   
+    <SkeletronEducation/>
   }
   </>
   );
 }
+
+// Сделать скелетон при загрузке главной страницы!!!!!!!!!
+// Доделать задания дня
+// Выносить нужные функции или тп в модули в отдельные файлы
+// Кэшировать данные после первого запроса и сохранять их на протяжении всего сеанса пользователя или до перезагрузки страницы. (Context API)

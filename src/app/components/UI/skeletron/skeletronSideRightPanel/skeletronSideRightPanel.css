@@ -1,0 +1,24 @@
+.skeletron{
+
+  .side-right-panel__inner{
+
+    .task-icon{
+      width: 30px;
+      height: 30px;
+      border-radius: 100px;
+      background: #383841;
+    }
+
+    .task-title{
+      color: transparent;
+      background: #383841;
+      border-radius: 100px;
+      width: 200px;
+    }
+
+    .progress-bar-fill{
+      background-color: gray;
+      box-shadow: 0px 0px 12px gray;
+    }
+  }
+}

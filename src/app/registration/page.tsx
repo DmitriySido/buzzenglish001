@@ -51,13 +51,15 @@ const Registration = () => {
   useEffect(() => {
     counter === 5 && setTimeout(() => handleNextStep(), 5000);
   }, [counter]);
-
   useEffect(() => {
     if (counter === 6) {
       setTimeout(async () => {
         try {
+          console.log(auth, userData.userEmail)
           const userCredential = await createUserWithEmailAndPassword(auth, userData.userEmail, userData.userPassword);
           const user = userCredential.user;
+          console.log(user)
+          console.log(doc(db, "users", user.uid)) 
 
           // Сохранение имени пользователя и других данных в Firestore
           await setDoc(doc(db, "users", user.uid), {

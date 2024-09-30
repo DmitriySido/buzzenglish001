@@ -173,3 +173,21 @@
   }
 }
 
+@media (max-width: 680px){
+  .login__wrapper{
+    .login-card {
+      width: 80vw;
+      max-width: 100%;
+
+      .login-input{
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+
+    .login__title {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+}

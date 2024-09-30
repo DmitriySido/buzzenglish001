@@ -20,3 +20,50 @@
   padding-top: 20px;
   background: #010027;
 }
+
+.few-words{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+
+  .few-words-wrapper-list{
+    width: 100%;
+    margin: 0px 20px;
+
+    .answer-few-button{
+      text-align: center;
+      width: 100%;
+      background: #fff;
+      padding: 15px 0px;
+      margin: 6px 0px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #010027;
+      box-shadow: 0 4px #61616b;
+
+      &:active{
+        box-shadow: 0 0px #61616b;
+        transform: translateY(4px);
+      }
+    }
+
+    .answer-few-button.disabled {
+      background-color: grey;
+      cursor: default;
+      opacity: 0.5;
+      box-shadow: none;
+      transform: translateY(4px);
+      transition: all .2s ease-in-out;
+    }
+
+    .answer-few-button.active{
+      box-shadow: 0 0px #61616b;
+      transform: translateY(4px);
+      opacity: 0.6;
+      cursor: default;
+    }
+  }
+}
