@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { auth } from "../../firebaseConfig";
 
+
 export default function Home() {
   const router = useRouter()
 
@@ -28,7 +29,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>Подождите!</h1>
+      <h2 className="loader-text">Buzz</h2>
     </main> 
   );
 }

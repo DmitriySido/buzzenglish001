@@ -5,10 +5,10 @@ import Link from 'next/link';
 
 const SkeletronSideNavigation = () => {
   const navigationLinks = [
-    { title: 'Обучение', path: '/education', id: 1},
-    { title: 'Профиль', path: '/profile', id: 2},
-    { title: 'Магазин', path: '/shop', id: 3},
-    { title: 'Настройки', path: '/settings', id: 4},
+    { title: 'Обучение', id: 1},
+    { title: 'Профиль', id: 2},
+    { title: 'Магазин', id: 3},
+    { title: 'Настройки', id: 4},
   ];
 
   return(

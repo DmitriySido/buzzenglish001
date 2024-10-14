@@ -10,7 +10,7 @@ interface IModule {
 const ModuleTitle = ({ color, module, chapter, lessonTitle}: IModule) => {
 
   return(
-    <>
+    <div className='module-header'>
       {
         module !== chapter ?
         <div className='lesson-list__subtitle'>
@@ -22,7 +22,7 @@ const ModuleTitle = ({ color, module, chapter, lessonTitle}: IModule) => {
           <h2 className='lesson-chapter-title'>{lessonTitle}</h2>  
         </div>
       }
-    </>
+    </div>
   )
 }
 

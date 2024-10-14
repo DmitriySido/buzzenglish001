@@ -13,32 +13,33 @@ import Lessonloading from '@/app/components/Lessonloading/Lessonloading';
 
 const CurrentLesson: CurrentLessonType = {
   words: [
-    {wordRu: 'Здравствуйте', wordEn: 'Hello', sideWords: { sideWordsRu: ['Пока', 'Как дела', 'Вечер'], sideWordsEn: ['Goodbye', 'Morning', 'Friend'] }},
-    {wordRu: 'Утро', wordEn: 'Morning', sideWords: { sideWordsRu: ['Вечер', 'День', 'Полдень'], sideWordsEn: ['Afternoon', 'Evening', 'Day'] }},
-    {wordRu: 'Полдень', wordEn: 'Afternoon', sideWords: { sideWordsRu: ['Утро', 'Вечер', 'День'], sideWordsEn: ['Morning', 'Evening', 'Night'] }},
-    {wordRu: 'Вечер', wordEn: 'Evening', sideWords: { sideWordsRu: ['Утро', 'День', 'Полдень'], sideWordsEn: ['Afternoon', 'Morning', 'Day'] }},
+    {wordRu: 'Рядом', wordEn: 'Nearby', sideWords: { sideWordsRu: ['Близко', 'Недалеко', 'Здесь'], sideWordsEn: ['Globe', 'Satellite', 'Transit'] }},
+    {wordRu: 'Маршрут', wordEn: 'Directions', sideWords: { sideWordsRu: ['Идти', 'Путь', 'Дорога'], sideWordsEn: ['Road', 'Street', 'Crossroad'] }},
+    {wordRu: 'Велодорожки', wordEn: 'Bicycling', sideWords: { sideWordsRu: ['Велосипед', 'Тропинка', 'Парковка'], sideWordsEn: ['Sidewalk', 'Underpass', 'Avenue'] }},
+    {wordRu: 'Карта', wordEn: 'Map', sideWords: { sideWordsRu: ['Рядом', 'За поворотом', 'Здесь'], sideWordsEn: ['Highway', 'Bridge', 'Mall'] }},
   ],
   phrases: [
-    { phrasesRu: 'Давно не виделись', phrasesEn: 'Long time no see', sideWords: { sideWordsRu: ['привет', 'где', 'смотреть'], sideWordsEn: ['hello', 'see', 'spicy'] } },
-    { phrasesRu: 'Как твои дела', phrasesEn: "How've you been", sideWords: { sideWordsRu: ['мои', 'сколько', 'где'], sideWordsEn: ['bind', 'global', 'performance'] } },
-    { phrasesRu: 'Доброе утро', phrasesEn: 'Good morning', sideWords: { sideWordsRu: ['круто', 'отлично', 'вечер'], sideWordsEn: ['sandwich', 'term', 'visual'] } },
-    { phrasesRu: 'Доброго вечера', phrasesEn: 'Good evening', sideWords: { sideWordsRu: ['плохого', 'отличного', 'дня'], sideWordsEn: ['reason', 'feedback', 'Friend'] } },
-    { phrasesRu: 'Как жизнь', phrasesEn: "How's life been treating you", sideWords: { sideWordsRu: ['зачем', 'здесь', 'мы'], sideWordsEn: ['dynamic', 'gravity', 'brain'] } },
-    { phrasesRu: 'Добый день', phrasesEn: 'Good afternoon', sideWords: { sideWordsRu: ['плохой', 'красочный', 'счастливый'], sideWordsEn: ['value', 'palm', 'check'] } },
-    { phrasesRu: "Что хорошего", phrasesEn: "What's good", sideWords: { sideWordsRu: ['где', 'приятно', 'круто'], sideWordsEn: ['rate', 'method', 'peace'] } },
-    { phrasesRu: 'Приятно познакомиться', phrasesEn: 'Nice to meet you', sideWords: { sideWordsRu: ['пока', 'привет', 'вечер'], sideWordsEn: ['sweet', 'memory', 'package'] } }
+    { phrasesRu: 'Идти прямо', phrasesEn: 'Go straight ahead', sideWords: { sideWordsRu: ['назад', 'вперёд', 'быстро'], sideWordsEn: ['strange', 'back', 'left'] } },
+    { phrasesRu: 'Идти через', phrasesEn: "Go across", sideWords: { sideWordsRu: ['бежать', 'в', 'возле'], sideWordsEn: ['going', 'over', 'cross'] } },
+    { phrasesRu: 'Повернуть налево', phrasesEn: 'Turn left', sideWords: { sideWordsRu: ['право', 'вперёд', 'развернуться'], sideWordsEn: ['on', 'right', 'rotate'] } },
+    { phrasesRu: 'Повернуть направо', phrasesEn: 'Turn right', sideWords: { sideWordsRu: ['лево', 'назад', 'идти'], sideWordsEn: ['in', 'left', 'the'] } },
+    { phrasesRu: 'Стоп', phrasesEn: "Stop", sideWords: { sideWordsRu: ['Скорее', 'Возле', 'Рядом'], sideWordsEn: ['Store', 'Smile', 'Spain'] } },
+    { phrasesRu: 'Взять', phrasesEn: 'Take a', sideWords: { sideWordsRu: ['Положить', 'Найти', 'Возле'], sideWordsEn: ['Give', 'at', 'Tolk'] } },
+    { phrasesRu: "Спрашивать", phrasesEn: "Asking", sideWords: { sideWordsRu: ['Где', 'говорить', 'Найти'], sideWordsEn: ['rate', 'method', 'peace'] } },
+    { phrasesRu: 'Прямо впереди', phrasesEn: 'Straight ahead', sideWords: { sideWordsRu: ['Сзади', 'Назад', 'Слева'], sideWordsEn: ['Left', 'Right', 'Back'] } }
   ],
   dialog: [
-    { dialogRu: 'Меня зовут Джон', dialogEn: 'My name is John', sideWords: { sideWordsRu: ['ты', 'мы', 'вы'], sideWordsEn: ['you', 'are', 'be'] } },
-    { dialogRu: 'Откуда ты', dialogEn: 'Where are you from', sideWords: { sideWordsRu: ['где', 'сколько', 'здесь'], sideWordsEn: ['why', 'a', 'form'] } },
-    { dialogRu: 'Я из Канады', dialogEn: 'I am from Canada', sideWords: { sideWordsRu: ['в', 'рядом', 'мы'], sideWordsEn: ['a', 'is', 'at'] } },
-    { dialogRu: 'Как тебя зовут', dialogEn: 'What is your name', sideWords: { sideWordsRu: ['где', 'сколько', 'нас'], sideWordsEn: ['where', 'why', 'you'] } },
-    { dialogRu: 'Это моя подруга Capa', dialogEn: 'This is my friend Sarah', sideWords: { sideWordsRu: ['наша', 'ваша', 'твоя'], sideWordsEn: ['our', 'us', 'you'] } },
-    { dialogRu: 'Сколько тебе лет', dialogEn: 'How old are you', sideWords: { sideWordsRu: ['дней', 'кто', 'где'], sideWordsEn: ['where', 'are', 'is'] } },
+    { dialogRu: 'Как мне добраться до…', dialogEn: 'How can I get to…', sideWords: { sideWordsRu: ['ты', 'мы', 'вы'], sideWordsEn: ['you', 'are', 'be'] } },
+    { dialogRu: 'Здесь есть какой-нибудь…', dialogEn: 'Is there any…', sideWords: { sideWordsRu: ['где', 'сколько', 'здесь'], sideWordsEn: ['why', 'a', 'form'] } },
+    { dialogRu: 'Не могли бы вы подсказать…', dialogEn: 'Could you tell me…', sideWords: { sideWordsRu: ['в', 'рядом', 'мы'], sideWordsEn: ['a', 'is', 'on'] } },
+    { dialogRu: 'Я ищу…', dialogEn: 'I am looking for…', sideWords: { sideWordsRu: ['Мы', 'видим', 'для'], sideWordsEn: ['we', 'are', 'where'] } },
+    { dialogRu: 'Какой кратчайший путь…', dialogEn: 'What is the shortest way…', sideWords: { sideWordsRu: ['где', 'дорога', 'высокий'], sideWordsEn: ['where', 'a', 'road'] } },
+    { dialogRu: 'Как…', dialogEn: 'How to…', sideWords: { sideWordsRu: ['Здесь', 'Кто', 'Где'], sideWordsEn: ['where', 'are', 'is'] } },
+    { dialogRu: 'Как мне пройти к…', dialogEn: 'How can I get to…', sideWords: { sideWordsRu: ['Здесь', 'Кто', 'Где'], sideWordsEn: ['where', 'are', 'is'] } },
   ],
   fewWords: [
-    {fewWordRu: 'Привет', fewWordEn: 'Hello'}, {fewWordRu: 'Доброе утро', fewWordEn: 'Good morn­ing'}, {fewWordRu: 'Добрый вечер', fewWordEn: 'Good evening'}, {fewWordRu: 'Добрый день', fewWordEn: 'Good afternoon'}, {fewWordRu: 'Спасибо вам', fewWordEn: 'Thank you'},
-    {fewWordRu: 'Как делишки?', fewWordEn: "What's up?"}, {fewWordRu: 'Извините меня', fewWordEn: 'Excuse me'}, {fewWordRu: 'Хорошо', fewWordEn: 'Fine'}, {fewWordRu: 'Мне жаль', fewWordEn: "I'm sorry"}, {fewWordRu: 'Меня зовут...', fewWordEn: 'My name is...'},
+    {fewWordRu: 'Школа', fewWordEn: 'School'}, {fewWordRu: 'Станция метро', fewWordEn: 'Subway station'}, {fewWordRu: 'Остановка трамвая', fewWordEn: 'Tram station'}, {fewWordRu: 'Алея', fewWordEn: 'Alley'}, {fewWordRu: 'Мост', fewWordEn: 'Bridge'},
+    {fewWordRu: 'Дорога', fewWordEn: "Road"}, {fewWordRu: 'Извините меня', fewWordEn: 'Excuse me'}, {fewWordRu: 'Улица', fewWordEn: 'Street'}, {fewWordRu: 'Дорожное движение', fewWordEn: "Traffic"}, {fewWordRu: 'Аэропорт', fewWordEn: 'Airport'},
   ]
 }
 

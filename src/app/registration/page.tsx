@@ -31,7 +31,8 @@ const Registration = () => {
     userEmail: '',
     userPassword: '',
     userName: '',
-    userProgress: []
+    userProgress: [],
+    userExperience: 0,
   });
   const [registrationError, setRegistrationError] = useState<string | null>(null);
   const router = useRouter();
@@ -66,6 +67,7 @@ const Registration = () => {
             userName: userData.userName,
             email: userData.userEmail,
             userProgress: [],
+            userExperience: 0,
           });
 
           router.replace('/');

@@ -1,91 +1,54 @@
 'use client'
 
 import './education.scss';
-import { useLessonContext } from '../utils/context/LessonContext';
+import { useLessonContext } from '../utils/context/LessonContext'; 
 import { useState, useEffect, useRef } from 'react';
 import TooltipPopup from '../components/UI/popups/tooltipPopup/TooltipPopup';
 import ModuleTitle from '../components/UI/lessonListUI/ModuleTitle';
 import LessonButton from '../components/UI/lessonListUI/lessonButton/LessonButton';
 import { useRouter } from "next/navigation";
-
-// Firebase
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../firebaseConfig";
-import { onAuthStateChanged } from 'firebase/auth';
-import { ILesson, SomeFieldType } from '../utils/interfaces/ILessons/ILessons';
-import { UserDataType } from '../utils/interfaces/IUser/IUser';
-import { DataType } from '../utils/interfaces/IData/IData';
+import { useLessonData } from '../utils/context/LessonDataContext';
 import SideRightPanel from '../components/UI/sideRightPanel/SideRightPanel';
 import SkeletronEducation from '../components/UI/skeletron/skeletronEducation/SkeletronEducation';
-
-
+import { ILesson } from '../utils/interfaces/ILessons/ILessons';
+import { auth } from '../../../firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function Education() {
-  const [data, setData] = useState<DataType[]>([]);
-  const [lessonList, setLessonList] = useState<ILesson[]>([]);
-  const [userData, setUserData] = useState<UserDataType | null>(null);
   const [isTooltipPopup, setIsTooltipPopup] = useState<boolean>(false);
   const [currentLesson, setCurrentLesson] = useState<ILesson | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const popupWrapperRef = useRef<HTMLDivElement>(null);
 
+  const { lessonList, userData, fetchData } = useLessonData(); 
   const router = useRouter();
 
   useEffect(() => {
-    console.log('reload')
-    const fetchData = async () => {
-      try {
-        const [lessonsSnapshot, usersSnapshot] = await Promise.all([
-          getDocs(collection(db, "LessonsList")),
-          getDocs(collection(db, "users")),
-        ]);
-
-        // Обработка данных уроков
-        const lessonsData: DataType[] = lessonsSnapshot.docs.map(doc => ({
-          id: doc.id,
-          someField: doc.data() as SomeFieldType,
-        }));
-        setData(lessonsData);
-
-        // Обработка данных пользователя
-        const user = auth.currentUser;
-        if (user) {
-          const userDoc = await getDoc(doc(db, "users", user.uid));
-          userDoc.exists() ?
-            setUserData({ id: user.uid, ...userDoc.data() } as UserDataType)
-              :
-            console.log("Документ пользователя не найден!");
-        }
-      } catch (error) {
-        console.error("Ошибка при получении данных:", error);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        await fetchData(); 
+        router.replace('/education');
+      } else {
+        router.replace('/login');
       }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(()=>{
-    userData && console.log(userData)
-  },[userData])
-
-  useEffect(() => {
-    data.length > 0 && setLessonList(data.flatMap(item => item.someField.lessonList)); // Все уроки
-  }, [data]);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => user ? router.replace('/education') : router.replace('/login'));
-
+    });
     return () => unsubscribe();
-  }, [router]);
+  }, [router]); 
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // Проверяем, был ли клик вне попапа
       if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
         setIsTooltipPopup(false);
+        
+        setCurrentLesson(null);
       }
     };
-
+  
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const { setLessonData } = useLessonContext();
@@ -104,55 +67,51 @@ export default function Education() {
   };
 
   return (
-    <>
-    {userData ? 
-    <main className='main'>
-        <ul className='lesson-list'>
-          {lessonList.map((lesson, index) => {
-            const showTitle = index === 0 || lessonList[index - 1].chapter !== lesson.chapter;
-            const progressCount = getLessonProgress(lesson.lessonID); // Получаем количество повторяющихся элементов
-    
-            return (
-              <div className='lesson-button__wrapper' key={lesson.lessonID}>
-                {showTitle && (
-                  <ModuleTitle
-                    color={lesson.color}
-                    module={lesson.module}
-                    chapter={lesson.chapter}
-                    lessonTitle={lesson.lessonTitle}
-                  />
-                )}
-                <LessonButton
-                  color={lesson.color}
-                  lesson={lesson}
-                  handleLessonClick={handleLessonClick}
-                />
-                
-                {isTooltipPopup && currentLesson?.lessonPath === lesson.lessonPath && (
-                  <TooltipPopup
-                    progressCount={progressCount}
-                    path={lesson.lessonPath}
-                    color={lesson.color}
-                    lessonSubitle={lesson.lessonSubtitle}
-                    experience={lesson.lessonExperience}
-                    ref={tooltipRef}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </ul>
+    <div ref={popupWrapperRef}>
+      {userData ? 
+        <main className='main'>
+          <ul className='lesson-list'>
+            {lessonList.map((lesson, index) => {
+              const showTitle = index === 0 || lessonList[index - 1].chapter !== lesson.chapter;
+              const progressCount = getLessonProgress(lesson.lessonID);
 
-        <SideRightPanel/>
-    </main>
-    :
-    <SkeletronEducation/>
-  }
-  </>
+              return (
+                <div className='lesson-button__wrapper' key={lesson.lessonID}>
+                  {showTitle && (
+                    <ModuleTitle
+                      color={lesson.color}
+                      module={lesson.module}
+                      chapter={lesson.chapter}
+                      lessonTitle={lesson.lessonTitle}
+                    />
+                  )}
+                  <LessonButton
+                    color={lesson.color}
+                    lesson={lesson}
+                    handleLessonClick={handleLessonClick}
+                    progressCount={progressCount}
+                  />
+                  
+                  {isTooltipPopup && currentLesson?.lessonPath === lesson.lessonPath && (
+                    <TooltipPopup
+                      progressCount={progressCount}
+                      path={lesson.lessonPath}
+                      color={lesson.color}
+                      lessonSubitle={lesson.lessonSubtitle}
+                      experience={lesson.lessonExperience}
+                      ref={tooltipRef}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </ul>
+
+          <SideRightPanel userExperience={userData.userExperience}/>
+        </main>
+      :
+        <SkeletronEducation />
+      }
+    </div>
   );
 }
-
-// Сделать скелетон при загрузке главной страницы!!!!!!!!!
-// Доделать задания дня
-// Выносить нужные функции или тп в модули в отдельные файлы
-// Кэшировать данные после первого запроса и сохранять их на протяжении всего сеанса пользователя или до перезагрузки страницы. (Context API)

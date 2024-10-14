@@ -9,6 +9,7 @@ export interface ILesson {
   color: string;
   lessonID: string;
   lessonSubtitle: string;
+  lessonList?: SomeFieldType[]
 }
 
 export interface SomeFieldType {

@@ -6,10 +6,16 @@
   border-radius: 100px;
   margin: 0 auto 10px auto;
   transform: translateX(0px) scaleY(0.9) translateY(-6px);
+  transition: all .2s ease-in-out;
 
   .icon-star{
     margin-left: -2px;
     margin-top: -2px;
+  }
+
+  .icon-check-mark{
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -62,8 +68,6 @@
   }
 }
 
-
-
 /*Skeletron*/
 .gray-lesson-item {
   background: gray;
@@ -72,5 +76,20 @@
   &:active{
     transform: translateX(0px) scaleY(0.9) translateY(0px);
     box-shadow: 0px 0px transparent;
+  }
+
+  @keyframes identifier {
+    0%{
+      transform: rotate(0deg) scale(0.1);
+    }100%{
+      transform: rotate(280deg) scale(1);
+    }
+  }
+
+  .icon-star{
+    margin-left: -2px;
+    margin-top: -2px;
+
+    animation: identifier 1s ease-in-out 1;
   }
 }

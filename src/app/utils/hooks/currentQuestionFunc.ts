@@ -28,6 +28,7 @@ export const currentQuestionFunc = ({
   setCurrentQuestion
 }: ICurrentQuestion) => {
   if (!CurrentLesson) return;
+  // console.log(CurrentLesson)
 
   setAnswerList([]);
   // const newRandomTaskState = 3

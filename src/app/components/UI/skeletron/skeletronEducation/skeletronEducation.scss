@@ -14,4 +14,37 @@
     width: 300px;
     border-radius: 10px;
   }
+
+  @keyframes showModule {
+    0%{
+      transform: translateY(-100px);
+    }100%{
+      transform: translateY(0px);
+    }
+  }
+
+  .lesson-list__title{
+    animation: showModule .7s cubic-bezier(.66,.01,.18,1.54) 1;
+  }
+
+  .lesson-list__subtitle{
+
+    @keyframes showPseudoElement {
+      0%{
+        width: 0%;
+      }100%{
+        width: 25%;
+      }
+    }
+
+    &::before{
+      width: 25%;
+      animation: showPseudoElement .7s cubic-bezier(.66,.01,.18,1.54) 1;
+    }
+  
+    &::after{
+      width: 25%;
+      animation: showPseudoElement .7s cubic-bezier(.66,.01,.18,1.54) 1;
+    }
+  }
 }

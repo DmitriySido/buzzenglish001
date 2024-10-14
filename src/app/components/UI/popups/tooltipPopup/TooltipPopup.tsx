@@ -15,9 +15,9 @@ interface TooltipPopupProps {
 const TooltipPopup = forwardRef<HTMLDivElement, TooltipPopupProps>(({ lessonSubitle, experience, color, path, progressCount }, ref) => {
 
   return (
-    <div className='tooltip-popup-wrapper'>
+    <div className='tooltip-popup-wrapper' ref={ref}>
       <div className='overlay'></div>
-      <div className={`${color}-tooltip tooltip-popup`} ref={ref}>
+      <div className={`${color}-tooltip tooltip-popup`}>
         <h2 className='tooltip-title'>{lessonSubitle}</h2>
         <p className='tooltip-progress'>Урок {progressCount}/6</p>
         <Link href={path}>
@@ -28,6 +28,6 @@ const TooltipPopup = forwardRef<HTMLDivElement, TooltipPopupProps>(({ lessonSubi
   );
 });
 
-TooltipPopup.displayName = 'TooltipPopupsss';
+TooltipPopup.displayName = 'TooltipPopup';
 
 export default TooltipPopup;

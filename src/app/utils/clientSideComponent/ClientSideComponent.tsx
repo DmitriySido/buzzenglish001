@@ -2,9 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import SideNavigation from '../../components/UI/sideNavigation/SideNavigation';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../../../firebaseConfig';
+import { auth, db } from '../../../../firebaseConfig';
 import { DataType } from '../interfaces/IData/IData';
 import { SomeFieldType } from '../interfaces/ILessons/ILessons';
 import SkeletronSideNavigation from '@/app/components/UI/skeletron/skeletronNavigation/SkeletronSideNavigation';
@@ -15,7 +15,7 @@ const ClientSideComponent = ({ children }: { children: React.ReactNode }) => {
 
   const pathList = ['/education', '/profile', '/shop', '/settings'];
   const shouldShowSideNavigation = pathList.includes(pathname);
-
+console.log(shouldShowSideNavigation)
   useEffect(() => {
     console.log('reload')
     const fetchData = async () => {
@@ -30,6 +30,7 @@ const ClientSideComponent = ({ children }: { children: React.ReactNode }) => {
           id: doc.id,
           someField: doc.data() as SomeFieldType,
         }));
+        console.log(lessonsData.length)
         setData(lessonsData);
       } catch (error) {
         console.error("Ошибка при получении данных:", error);
@@ -39,9 +40,16 @@ const ClientSideComponent = ({ children }: { children: React.ReactNode }) => {
     fetchData();
   }, []);
 
+  const user = auth.currentUser;
+  console.log(user)
+
   return (
     <div className={shouldShowSideNavigation ? 'main-container' : ''}>
-      {data.length <= 0 ? <SkeletronSideNavigation/> : shouldShowSideNavigation && <SideNavigation /> }
+      {user === null && !shouldShowSideNavigation ? '' : 
+        (user !== null && shouldShowSideNavigation ? <SideNavigation /> :
+          (shouldShowSideNavigation ? <SkeletronSideNavigation/> : '')
+        )
+      }
       {children}
     </div>
   );

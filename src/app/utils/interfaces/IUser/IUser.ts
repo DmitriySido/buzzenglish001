@@ -3,6 +3,7 @@ export interface UserDataType {
   userName: string;
   email: string;
   userProgress: string[],
+  userExperience: number,
 };
 
 export interface IUser {
@@ -10,4 +11,5 @@ export interface IUser {
   userPassword: string;
   userName?: string;
   userProgress?: string[],
+  userExperience: number,
 }

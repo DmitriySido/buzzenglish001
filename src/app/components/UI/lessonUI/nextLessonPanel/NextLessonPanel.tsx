@@ -31,7 +31,10 @@ const NextLessonPanel = ({ handleNextQuestion, progressBar, lessons}: any) => {
       const userProgress = userDocSnap.data()?.userProgress || [];
       const updatedUserProgress = [...userProgress, lessons[0].lessonID];
 
-      await updateDoc(userDocRef, { userProgress: updatedUserProgress });
+      const userExperience = userDocSnap.data()?.userExperience || 0
+      const updatedUserExperience = userExperience + 10
+
+      await updateDoc(userDocRef, { userProgress: updatedUserProgress, userExperience: updatedUserExperience});
 
       console.log('User progress updated');
       router.push('/education');

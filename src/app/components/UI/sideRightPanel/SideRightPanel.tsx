@@ -4,8 +4,11 @@ import ProgressBar from '../lessonUI/topPanel/progressBar/progressBar'
 import ExperienceIcon from '../../../../../public/icons/experience-icon.png'
 import { ITask } from '@/app/utils/interfaces/ITaskOfTheDay/ITaskOfTheDay'
 
+interface ISideRightPanel {
+  userExperience: number
+}
 
-const SideRightPanel = () => {
+const SideRightPanel = ({ userExperience = 0 }: ISideRightPanel) => {
   const tasksOfTheDay = [
     {
       taskName: 'Получите 10 очков опыта',
@@ -33,8 +36,8 @@ const SideRightPanel = () => {
   return(
     <div className='side-right-panel'>
       <div className='side-right-panel__inner'>
-        <p className='user-experience'>30 Опыта</p>
-
+        <p className='user-experience'>{`${userExperience}`} Опыта</p>
+        
         <ul className='tasks-the-day__list'>
           <h3 className='task-list-title'>Задания дня</h3>
           <li className='tasks-the-day__item'>
