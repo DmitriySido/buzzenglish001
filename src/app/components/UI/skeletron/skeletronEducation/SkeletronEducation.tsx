@@ -25,6 +25,7 @@ const SkeletronEducation = () => {
                 />
               )}
               <LessonButton
+                progressCount={0}
                 color={lesson.color}
                 lesson={lesson}
                 handleLessonClick={() => {}}

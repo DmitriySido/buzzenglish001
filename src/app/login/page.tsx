@@ -19,7 +19,7 @@ const Login = () => {
   ]
 
   const { counter, animate, inputValue, setInputValue, handleNextStep } = UseLoginSteps(0)
-  const [userData, setUserData] = useState<IUser>({ userEmail: '', userPassword: '' })
+  const [userData, setUserData] = useState<IUser>({ userEmail: '', userPassword: '', userExperience: 0 })
   const [signInError, setSignInError] = useState<string | null>(null)
   const router = useRouter()
 
