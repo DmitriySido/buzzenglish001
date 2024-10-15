@@ -71,6 +71,12 @@ body{
   margin: 0 auto;
 }
 
+@media (max-width: 500px){
+  .main-container{
+    left: 50px;
+  }
+}
+
 .container{
   width: 100%;
   max-width: 850px;

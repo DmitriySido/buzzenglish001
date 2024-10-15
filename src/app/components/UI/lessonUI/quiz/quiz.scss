@@ -5,6 +5,12 @@
   margin-bottom: 0px;
   padding-bottom: 20px;
   border-bottom: 1px solid #61616b;
+
+  @media (max-width: 500px){
+    &{
+      font-size: 18px;
+    }
+  }
 }
 
 .field__wrapper{
@@ -27,6 +33,12 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  
+  @media (max-width: 500px){
+    &{
+      width: 100%;
+    }
+  }
 
   .few-words-wrapper-list{
     width: 100%;
@@ -47,6 +59,13 @@
       &:active{
         box-shadow: 0 0px #61616b;
         transform: translateY(4px);
+      }
+
+      @media (max-width: 500px){
+        &{
+          font-size: 14px;
+          padding: 15px 0px;
+        }
       }
     }
 

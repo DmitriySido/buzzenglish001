@@ -1,5 +1,5 @@
 
-import './skeletronSideRightPanel.css'
+import './skeletronSideRightPanel.scss'
 
 import { ITask } from '@/app/utils/interfaces/ITaskOfTheDay/ITaskOfTheDay'
 import { SkeletronDataTasksOfTheDay } from '@/app/utils/skeletronData/skeletronDataTaskOfTheDay'

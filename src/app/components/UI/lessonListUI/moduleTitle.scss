@@ -9,7 +9,14 @@
   border-radius: 10px;
   margin: 0px auto 30px auto;
   background: #494954;
-  padding: 25px 25px;
+  padding: 25px;
+
+  @media (max-width: 500px){
+    &{
+      padding: 20px;
+      width: 100%;
+    }
+  }
 
   .lesson-title__module{
     text-transform: uppercase;
@@ -18,12 +25,24 @@
     font-size: 14px;
     letter-spacing: 1.1px;
     margin-bottom: 10px;
+
+    @media (max-width: 500px){
+      &{
+        font-size: 12px;
+      }
+    }
   }
 
   .lesson-chapter-title{
     font-size: 16px;
     letter-spacing: 1.2px;
     font-weight: 700;
+
+    @media (max-width: 500px){
+      &{
+        font-size: 14px;
+      }
+    }
   }
 }
 
@@ -54,6 +73,12 @@
     background: #fff;
     left: 0px;
     top: 35%;
+
+    @media (max-width: 500px){
+      &{
+        width: 15%;
+      }
+    }
   }
 
   &::after{
@@ -65,11 +90,23 @@
     background: #fff;
     right: 0px;
     top: 35%;
+
+    @media (max-width: 500px){
+      &{
+        width: 15%;
+      }
+    }
   }
 
   .lesson-chapter-title{
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 1px;
+
+    @media (max-width: 500px){
+      &{
+        font-size: 16px;
+      }
+    }
   }
 }

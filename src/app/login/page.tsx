@@ -10,6 +10,10 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage'
 import SignButton from '../components/UI/buttons/signButton/SignButton'
 import { IUser } from '../utils/interfaces/IUser/IUser'
+import Image from 'next/image'
+
+import VisiblePasswordIcon from '../../../public/icons/visible-password-icon.png'
+import HiddenPasswordIcon from '../../../public/icons/hidden-password-icon.png'
 
 const Login = () => {
   const loginSteps = [
@@ -19,6 +23,8 @@ const Login = () => {
   ]
 
   const { counter, animate, inputValue, setInputValue, handleNextStep } = UseLoginSteps(0)
+  const [isPasswordButton, setIsPasswordButton ] = useState<boolean>(false)
+
   const [userData, setUserData] = useState<IUser>({ userEmail: '', userPassword: '', userExperience: 0 })
   const [signInError, setSignInError] = useState<string | null>(null)
   const router = useRouter()
@@ -62,16 +68,26 @@ const Login = () => {
       {counter < loginSteps.length && <h1 className={`login__title ${animate ? 'fade-out' : 'fade-in'} ${counter === 2 ? 'center' : ''}`}>{loginSteps[counter].title}</h1>}
       <form className={`login-card ${animate ? 'fade-in-left' : 'fade-out-right'}`}>
         {counter <= 1 && (
-          <>
+          <div className='input-wrapper-login'>
             <input
               className='login-input'
-              type={counter === 0 ? 'email' : 'password'}
+              type={counter === 0 ? 'email' : (counter === 1 ? (isPasswordButton ? 'text' : 'password') : 'text')}
               name="inputUser"
               placeholder={loginSteps[counter].placeholder}
               value={inputValue}
               onChange={handleInputChange}
             />
-          </>
+            {counter === 1 && 
+                <button className='show-password-button' onClick={() => setIsPasswordButton(!isPasswordButton)} type='button'>
+                  <Image
+                    className='eye-icon'
+                    width={30}
+                    height={30}
+                    src={isPasswordButton ? VisiblePasswordIcon : HiddenPasswordIcon}
+                    alt='Show Password'
+                  />
+                </button>}
+          </div>
         )}
         {counter < 3 && <ButtonNext counter={counter} inputValue={inputValue} handleNextButton={handleNextButton}/>}
       </form>
