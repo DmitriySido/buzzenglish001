@@ -24,7 +24,7 @@
   }
 
   .lesson-list__title{
-    animation: showModule .7s cubic-bezier(.66,.01,.18,1.54) 1;
+    animation: showModule .4s cubic-bezier(.66,.01,.18,1.54) 1;
   }
 
   .lesson-list__subtitle{
@@ -39,12 +39,12 @@
 
     &::before{
       width: 25%;
-      animation: showPseudoElement .7s cubic-bezier(.66,.01,.18,1.54) 1;
+      animation: showPseudoElement .4s cubic-bezier(.66,.01,.18,1.54) 1;
     }
   
     &::after{
       width: 25%;
-      animation: showPseudoElement .7s cubic-bezier(.66,.01,.18,1.54) 1;
+      animation: showPseudoElement .4s cubic-bezier(.66,.01,.18,1.54) 1;
     }
   }
 }
