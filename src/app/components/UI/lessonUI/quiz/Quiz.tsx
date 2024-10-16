@@ -98,25 +98,25 @@ const Quiz: React.FC<IQuiz> = React.memo(({
     switch (true) {
       case 'wordEn' in currentQuestion && 'wordRu' in currentQuestion:
           return(
-            <button className="tooltip-container">
+            <div className="tooltip-container" tabIndex={0}>
               <span className="tooltip">{currentLang === 1 ? (currentQuestion as WordType).wordEn : (currentQuestion as WordType).wordRu}</span>
               <span className="text">{currentLang === 0 ? (currentQuestion as WordType).wordEn : (currentQuestion as WordType).wordRu}</span>
-            </button>
+            </div>
           )
       case 'phrasesEn' in currentQuestion && 'phrasesRu' in currentQuestion:
         return(
-          <button className="tooltip-container">
+          <div className="tooltip-container" tabIndex={0}>
             <span className="tooltip">{currentLang === 1 ? (currentQuestion as PhraseType).phrasesEn : (currentQuestion as PhraseType).phrasesRu}</span>
             <span className="text">{currentLang === 0 ? (currentQuestion as PhraseType).phrasesEn : (currentQuestion as PhraseType).phrasesRu}</span>
-          </button>
+          </div>
         )
 
       case 'dialogEn' in currentQuestion && 'dialogRu' in currentQuestion:
         return(
-          <button className="tooltip-container">
+          <div className="tooltip-container" tabIndex={0}>
             <span className="tooltip">{currentLang === 1 ? (currentQuestion as DialogType).dialogEn : (currentQuestion as DialogType).dialogRu}</span>
             <span className="text">{currentLang === 0 ? (currentQuestion as DialogType).dialogEn : (currentQuestion as DialogType).dialogRu}</span>
-          </button>
+          </div>
         )
 
       case Array.isArray(currentQuestion) && currentQuestion.length > 0:
