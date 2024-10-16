@@ -12,11 +12,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import SignButton from '../components/UI/buttons/signButton/SignButton';
 import { IUser } from '../utils/interfaces/IUser/IUser';
-import Image from 'next/image';
-
-
-import VisiblePasswordIcon from '../../../public/icons/visible-password-icon.png'
-import HiddenPasswordIcon from '../../../public/icons/hidden-password-icon.png'
+import LoginInput from '../components/login/LoginInput';
 
 const Registration = () => {
   const loginSteps = [
@@ -32,7 +28,6 @@ const Registration = () => {
   const knowledgeLevel = ['Только начинаю', 'Начинаю продолжать', 'Продолжаю продолжать', 'В2'];
 
   const { counter, animate, inputValue, setInputValue, handleNextStep } = UseLoginSteps(0);
-  const [isPasswordButton, setIsPasswordButton ] = useState<boolean>(false)
 
   const [userData, setUserData] = useState<IUser>({
     userEmail: '',
@@ -95,10 +90,6 @@ const Registration = () => {
     setInputValue(value);
   };
 
-  useEffect(()=>{
-    console.log(isPasswordButton)
-  }, [isPasswordButton])
-
   return (
     <>
       <div className={`login__wrapper ${counter >= 6 ? 'end' : ''}`}>
@@ -107,26 +98,12 @@ const Registration = () => {
         </h1>
         <form className={`login-card ${animate ? 'fade-in-left' : 'fade-out-right'}`}>
           {counter <= 2 && (
-            <div className='input-wrapper'>
-              <input
-                className='login-input'
-                type={counter === 0 ? 'email' : (counter === 1 ? (isPasswordButton ? 'text' : 'password') : 'text')}
-                name={counter === 2 ? "userName" : "inputUser"}
-                placeholder={loginSteps[counter].placeholder}
-                value={inputValue}
-                onChange={handleInputChange}
-              />
-              {counter === 1 && 
-                <button className='show-password-button' onClick={() => setIsPasswordButton(!isPasswordButton)} type='button'>
-                  <Image
-                    className='eye-icon'
-                    width={30}
-                    height={30}
-                    src={isPasswordButton ? VisiblePasswordIcon : HiddenPasswordIcon}
-                    alt='Show Password'
-                  />
-                </button>}
-            </div>
+            <LoginInput
+              counter={counter}
+              loginSteps={loginSteps}
+              inputValue={inputValue}
+              handleInputChange={handleInputChange}
+            />
           )}
           {counter === 3 && (
             <ul className='knowledge-level-list'>
@@ -141,9 +118,9 @@ const Registration = () => {
           )}
 
           {counter === 4 && <CustomAvatar />}
-          
           {counter !== 3 && <ButtonNext counter={counter} inputValue={inputValue} handleNextButton={handleNextButton}/>}
         </form>
+
         {counter === 0 && <SignButton text='Вход' path='login'/>}
       </div>
 

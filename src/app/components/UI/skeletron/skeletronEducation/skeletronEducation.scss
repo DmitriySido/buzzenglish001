@@ -48,3 +48,36 @@
     }
   }
 }
+
+@media (max-width: 500px){
+  .skeletron{
+    .lesson-title__module{
+      width: 190px;
+    }
+
+    .lesson-chapter-title{
+      width: 200px;
+    }
+
+    .lesson-list__subtitle{
+
+    @keyframes showPseudoElement {
+      0%{
+        width: 0%;
+      }100%{
+        width: 15%;
+      }
+    }
+
+    &::before{
+      width: 15%;
+      animation: showPseudoElement .4s cubic-bezier(.66,.01,.18,1.54) 1;
+    }
+  
+    &::after{
+      width: 15%;
+      animation: showPseudoElement .4s cubic-bezier(.66,.01,.18,1.54) 1;
+    }
+  }
+  }
+}

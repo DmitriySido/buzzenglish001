@@ -19,7 +19,7 @@ const TooltipPopup = forwardRef<HTMLDivElement, TooltipPopupProps>(({ lessonSubi
       <div className='overlay'></div>
       <div className={`${color}-tooltip tooltip-popup`}>
         <h2 className='tooltip-title'>{lessonSubitle}</h2>
-        <p className='tooltip-progress'>Урок {progressCount}/6</p>
+        <p className='tooltip-progress'>Урок {progressCount >= 6 ? '6' : progressCount}/6</p>
         <Link href={path}>
           <button className='button-start'>{`${progressCount >= 6 ? 'Повторить' : 'Начать:'}`} + {experience} опыта</button>
         </Link>

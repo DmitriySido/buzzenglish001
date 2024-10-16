@@ -44,55 +44,9 @@
     flex-direction: column;
     align-items: center;
 
-    .input-wrapper{
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 60%;
-      
-      .show-password-button{
-        position: absolute;
-        background: transparent;
-        padding: 10px;
-        right: -2px;
-        top: -4px;
-      }
-
-      /* Показываем кнопку, если инпут имеет тип "password" */
-      .login-input[type="password"] ~ .show-password-button {
-        display: block;
-      }
-
-      /* Скрываем кнопку, если тип инпута "email" */
-      .login-input[type="email"] ~ .show-password-button {
-        display: none;
-      }
-
-      .login-input {
-        width: 100%;
-        padding: 10px 15px;
-        border-radius: 0px;
-        background: transparent;
-        border: 1px solid #fff;
-        color: #fff;
-        font-weight: 500;
-        font-size: 15px;
-        margin-bottom: 30px;
-        letter-spacing: 2px;
-
-        &::placeholder {
-          color: #fff;
-          font-weight: 300;
-          font-size: 15px;
-          opacity: 0.5;
-          letter-spacing: 2px;
-        }
-      }
-    }
-
     @media (max-width: 500px) {
-      .input-wrapper{
-        width: 100%;
+      &{
+        width: 100vw;
       }
     }
 
@@ -132,12 +86,6 @@
       }
     }
   }
-
-  @media (max-width: 500px) {
-    .login-card{
-        width: 100vw;
-      }
-    }
 
   @keyframes fadeIn {
     0% {
@@ -214,25 +162,5 @@
 
   .fade-out-right {
     animation: fadeOutRight 1s forwards;
-  }
-}
-
-@media (max-width: 680px){
-  .login__wrapper{
-    .login-card {
-      width: 80vw;
-      max-width: 100%;
-
-      .login-input{
-        font-size: 12px;
-        font-weight: 400;
-      }
-    }
-
-    .login__title {
-      font-size: 14px;
-      text-align: center;
-      line-height: 140%;
-    }
   }
 }

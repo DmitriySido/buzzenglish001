@@ -48,6 +48,7 @@ const Quiz: React.FC<IQuiz> = React.memo(({
   }
 
   useEffect(() => {
+    console.log(currentQuestion)
     if (Array.isArray(currentQuestion) && currentQuestion.length > 0) {
       // Перемешиваем русские и английские слова отдельно
       const shuffledRuWords = shuffleArray(currentQuestion);
@@ -96,14 +97,28 @@ const Quiz: React.FC<IQuiz> = React.memo(({
   const renderQuestionContent = () => {
     switch (true) {
       case 'wordEn' in currentQuestion && 'wordRu' in currentQuestion:
-        return <h2 className="title-words">{currentLang === 0 ? (currentQuestion as WordType).wordEn : (currentQuestion as WordType).wordRu}</h2>;
-    
+          return(
+            <button className="tooltip-container">
+              <span className="tooltip">{currentLang === 1 ? (currentQuestion as WordType).wordEn : (currentQuestion as WordType).wordRu}</span>
+              <span className="text">{currentLang === 0 ? (currentQuestion as WordType).wordEn : (currentQuestion as WordType).wordRu}</span>
+            </button>
+          )
       case 'phrasesEn' in currentQuestion && 'phrasesRu' in currentQuestion:
-        return <h2 className="title-words">{currentLang === 0 ? (currentQuestion as PhraseType).phrasesEn : (currentQuestion as PhraseType).phrasesRu}</h2>;
-    
+        return(
+          <button className="tooltip-container">
+            <span className="tooltip">{currentLang === 1 ? (currentQuestion as PhraseType).phrasesEn : (currentQuestion as PhraseType).phrasesRu}</span>
+            <span className="text">{currentLang === 0 ? (currentQuestion as PhraseType).phrasesEn : (currentQuestion as PhraseType).phrasesRu}</span>
+          </button>
+        )
+
       case 'dialogEn' in currentQuestion && 'dialogRu' in currentQuestion:
-        return <h2 className="title-words">{currentLang === 0 ? (currentQuestion as DialogType).dialogEn : (currentQuestion as DialogType).dialogRu}</h2>;
-    
+        return(
+          <button className="tooltip-container">
+            <span className="tooltip">{currentLang === 1 ? (currentQuestion as DialogType).dialogEn : (currentQuestion as DialogType).dialogRu}</span>
+            <span className="text">{currentLang === 0 ? (currentQuestion as DialogType).dialogEn : (currentQuestion as DialogType).dialogRu}</span>
+          </button>
+        )
+
       case Array.isArray(currentQuestion) && currentQuestion.length > 0:
         return <h2 className="title-words">Выберете пары слов</h2>;
     

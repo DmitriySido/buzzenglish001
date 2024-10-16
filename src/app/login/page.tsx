@@ -14,6 +14,7 @@ import Image from 'next/image'
 
 import VisiblePasswordIcon from '../../../public/icons/visible-password-icon.png'
 import HiddenPasswordIcon from '../../../public/icons/hidden-password-icon.png'
+import LoginInput from '../components/login/LoginInput'
 
 const Login = () => {
   const loginSteps = [
@@ -68,32 +69,17 @@ const Login = () => {
       {counter < loginSteps.length && <h1 className={`login__title ${animate ? 'fade-out' : 'fade-in'} ${counter === 2 ? 'center' : ''}`}>{loginSteps[counter].title}</h1>}
       <form className={`login-card ${animate ? 'fade-in-left' : 'fade-out-right'}`}>
         {counter <= 1 && (
-          <div className='input-wrapper-login'>
-            <input
-              className='login-input'
-              type={counter === 0 ? 'email' : (counter === 1 ? (isPasswordButton ? 'text' : 'password') : 'text')}
-              name="inputUser"
-              placeholder={loginSteps[counter].placeholder}
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-            {counter === 1 && 
-                <button className='show-password-button' onClick={() => setIsPasswordButton(!isPasswordButton)} type='button'>
-                  <Image
-                    className='eye-icon'
-                    width={30}
-                    height={30}
-                    src={isPasswordButton ? VisiblePasswordIcon : HiddenPasswordIcon}
-                    alt='Show Password'
-                  />
-                </button>}
-          </div>
+          <LoginInput
+            counter={counter}
+            loginSteps={loginSteps}
+            inputValue={inputValue}
+            handleInputChange={handleInputChange}
+          />
         )}
         {counter < 3 && <ButtonNext counter={counter} inputValue={inputValue} handleNextButton={handleNextButton}/>}
       </form>
 
-      {counter === 0 && <SignButton text='Регистрация' path='registration'/>}
-
+      <SignButton text='Регистрация' path='registration'/>
       {signInError && <ErrorMessage errorTitle={'Ошибка при входе!'} textError={signInError} buttonText={'Попробовать ещё раз'}/>}
     </div>
   )
